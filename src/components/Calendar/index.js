@@ -91,7 +91,12 @@ class Calendar extends PureComponent {
     }
     const targetMonthIndex = differenceInCalendarMonths(date, props.minDate, this.dateOptions);
     const visibleMonths = this.list.getVisibleRange();
-    if (preventUnnecessary && visibleMonths.includes(targetMonthIndex)) return;
+    if (
+      preventUnnecessary &&
+      targetMonthIndex >= visibleMonths[0] &&
+      targetMonthIndex <= visibleMonths[1]
+    )
+      return;
     this.isFirstRender = true;
     this.list.scrollTo(targetMonthIndex);
     this.setState({ focusedDate: date });
